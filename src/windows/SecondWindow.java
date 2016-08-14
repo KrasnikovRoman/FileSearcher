@@ -1,6 +1,10 @@
+package windows;
+
+import helper.CellRenderer;
+import helper.Constants;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
 
 
 /**

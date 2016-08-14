@@ -1,3 +1,7 @@
+package main;
+
+import windows.FirstWindow;
+
 import javax.swing.*;
 
 /**
