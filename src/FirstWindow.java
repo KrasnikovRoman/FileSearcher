@@ -11,13 +11,14 @@ public class FirstWindow extends JFrame implements ActionListener {
     private JTextField textField;
     private JLabel label;
     private JButton button;
-    private JRadioButton radioButton;
+    private JRadioButton radioButton1, radioButton2;
 
-    HashMap<String, String> information = new HashMap<>();
+    HashMap<String, String> information;
 
 
     public FirstWindow() {
         super();
+        information = new HashMap<>();
         searching = new Searching();
         this.setSize(Constants.width, Constants.height);
         this.setTitle(Constants.applicationName);
@@ -25,9 +26,10 @@ public class FirstWindow extends JFrame implements ActionListener {
         this.add(createTextField(), null);
         this.add(createLabel(), null);
         this.add(createButton(), null);
-        this.add(creareRadioButton(), null);
+        this.add(creareRadioButton1(), null);
+        this.add(createRadioButton2(), null);
         this.setVisible(true);
-        this.setResizable(false);
+        this.setResizable(true);
         this.setLocationRelativeTo(null);
 
     }
@@ -42,34 +44,45 @@ public class FirstWindow extends JFrame implements ActionListener {
 
     private JLabel createLabel() {
         if (label == null) {
-            label = new JLabel("Введите имя файла для поиска");
-            label.setBounds(10, 10, 300, 15);
+            label = new JLabel(Constants.labelName);
+            label.setBounds(Constants.labelX, Constants.labelY, Constants.labelWidth, Constants.labelHeight);
         }
         return label;
     }
 
     private JButton createButton() {
         if (button == null) {
-            button = new JButton("Search");
-            button.setBounds(315, 30, 50, 20);
+            button = new JButton(Constants.buttonName);
+            button.setBounds(Constants.buttonX, Constants.buttonY, Constants.buttonWidth, Constants.buttonHeight);
             button.addActionListener(this);
         }
         return button;
     }
 
-    private JRadioButton creareRadioButton() {
-        if (radioButton == null) {
-            radioButton = new JRadioButton("Additional information",false);
-            radioButton.setBounds(12, 60, 200, 20);
-            radioButton.addActionListener(this);
+    private JRadioButton creareRadioButton1() {
+        if (radioButton1 == null) {
+            radioButton1 = new JRadioButton(Constants.radioButtonName1,false);
+            radioButton1.setBounds(Constants.radioButton_1_X, Constants.radioButton_1_Y, Constants.radioButton_1_Width, Constants.radioButton_1_Height);
+            radioButton1.addActionListener(this);
         }
-        return radioButton;
+        return radioButton1;
+    }
+
+    private JRadioButton createRadioButton2() {
+        if (radioButton2 == null) {
+            radioButton2 = new JRadioButton(Constants.getRadioButtonName2, false);
+            radioButton2.setBounds(Constants.radioButton_2_X, Constants.radioButton_2_Y, Constants.radioButton_2_Width, Constants.radioButton_2_Height);
+            radioButton2.addActionListener(this);
+        }
+        return radioButton2;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Search") && !textField.getText().equals("")) {
-            new SecondWindow(information);
+        if (e.getActionCommand().equals(Constants.buttonName) && !textField.getText().equals("")) {
+            new SecondWindow();
         }
     }
+
+
 }
