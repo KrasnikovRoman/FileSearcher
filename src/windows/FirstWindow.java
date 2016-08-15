@@ -6,7 +6,6 @@ import logic.Searching;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 
 /**
  * Created by roman on 11.08.16.
@@ -16,26 +15,21 @@ public class FirstWindow extends JFrame implements ActionListener {
     private JTextField textField;
     private JLabel label;
     private JButton button;
-    private JRadioButton radioButton1, radioButton2;
-
-    HashMap<String, String> information;
-
+    private JRadioButton radioButton;
 
     public FirstWindow() {
         super();
-        information = new HashMap<>();
-        searching = new Searching();
         this.setSize(Constants.width, Constants.height);
         this.setTitle(Constants.applicationName);
         this.getContentPane().setLayout(null);
         this.add(createTextField(), null);
         this.add(createLabel(), null);
         this.add(createButton(), null);
-        this.add(creareRadioButton1(), null);
-        this.add(createRadioButton2(), null);
+        this.add(createRadioButton(), null);
         this.setVisible(true);
         this.setResizable(true);
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
 
@@ -64,28 +58,28 @@ public class FirstWindow extends JFrame implements ActionListener {
         return button;
     }
 
-    private JRadioButton creareRadioButton1() {
-        if (radioButton1 == null) {
-            radioButton1 = new JRadioButton(Constants.radioButtonName1,false);
-            radioButton1.setBounds(Constants.radioButton_1_X, Constants.radioButton_1_Y, Constants.radioButton_1_Width, Constants.radioButton_1_Height);
-            radioButton1.addActionListener(this);
+    private JRadioButton createRadioButton() {
+        if (radioButton == null) {
+            radioButton = new JRadioButton(Constants.radioButtonName,false);
+            radioButton.setBounds(Constants.radioButtonX, Constants.radioButtonY, Constants.radioButtonWidth, Constants.radioButtonHeight);
+            radioButton.addActionListener(this);
         }
-        return radioButton1;
-    }
-
-    private JRadioButton createRadioButton2() {
-        if (radioButton2 == null) {
-            radioButton2 = new JRadioButton(Constants.getRadioButtonName2, false);
-            radioButton2.setBounds(Constants.radioButton_2_X, Constants.radioButton_2_Y, Constants.radioButton_2_Width, Constants.radioButton_2_Height);
-            radioButton2.addActionListener(this);
-        }
-        return radioButton2;
+        return radioButton;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(Constants.buttonName) && !textField.getText().equals("")) {
-            new SecondWindow();
+            searching = new Searching(textField.getText(), Constants.workingDir, radioButton.isSelected());
+            Thread searchingThread = new Thread(searching);
+            searchingThread.start();
+            try {
+                searchingThread.join();
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            new SecondWindow(searching.getInformation());
+
         }
     }
 

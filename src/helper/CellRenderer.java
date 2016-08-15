@@ -25,7 +25,7 @@ public class CellRenderer extends JTextArea implements TableCellRenderer {
         int lineHeight = this.getFontMetrics(this.getFont()).getHeight();
         int rowWidth = table.getCellRect(row, column, true).width;
 
-        int newRowHeight = (int) ((lineWidth / rowWidth) * (lineHeight)) + lineHeight * 2;
+        int newRowHeight = (int) ((lineWidth / rowWidth) * (lineHeight)) + lineHeight * 2 + 40;
         if (table.getRowHeight(row) != newRowHeight) {
             table.setRowHeight(row, newRowHeight);
         }

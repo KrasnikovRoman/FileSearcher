@@ -7,10 +7,10 @@ public interface Constants {
     /*
     Сonstants for drawing the appearance of application
      */
-    int height = 125;
+    int height = 115;
     int width = 400;
-    int secondWindowWidth = 400;
-    int secondWindowHeight = 300;
+    int secondWindowWidth = 500;
+    int secondWindowHeight = 700;
     int textFieldX = 10;
     int textFieldY = 30;
     int textFieldWidth = 300;
@@ -23,23 +23,16 @@ public interface Constants {
     int buttonY = 30;
     int buttonWidth = 50;
     int buttonHeight = 20;
-    int radioButton_1_X = 12;
-    int radioButton_1_Y = 60;
-    int radioButton_1_Width = 200;
-    int radioButton_1_Height = 20;
-    int radioButton_2_X = 12;
-    int radioButton_2_Y = 80;
-    int radioButton_2_Width = 250;
-    int radioButton_2_Height = 20;
-
+    int radioButtonX = 12;
+    int radioButtonY = 60;
+    int radioButtonWidth = 200;
+    int radioButtonHeight = 20;
 
     String applicationName = "File searcher";
     String labelName = "Enter name of file for searching";
     String buttonName = "Search";
-    String radioButtonName1 = "Additional information";
-    String getRadioButtonName2 = "Search from working directory";
+    String radioButtonName = "Additional information";
     String secondWindowName = "Information";
 
-    String root = "/";
     String workingDir = System.getProperty("user.dir");
 }
