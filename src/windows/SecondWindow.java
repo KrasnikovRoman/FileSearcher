@@ -38,8 +38,8 @@ public class SecondWindow {
     private void createTable() {
         int i = 0;
         for (Map.Entry<String, String> entry : info.entrySet()) {
-            data[i][0] = entry.getKey();
-            data[i][1] = entry.getValue();
+            data[i][1] = entry.getKey();
+            data[i][0] = entry.getValue();
             i++;
         }
     }

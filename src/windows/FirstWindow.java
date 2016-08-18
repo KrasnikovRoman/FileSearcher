@@ -6,6 +6,10 @@ import logic.Searching;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by roman on 11.08.16.
@@ -67,18 +71,30 @@ public class FirstWindow extends JFrame implements ActionListener {
         return radioButton;
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(Constants.buttonName) && !textField.getText().equals("")) {
-            searching = new Searching(textField.getText(), Constants.workingDir, radioButton.isSelected());
-            Thread searchingThread = new Thread(searching);
+            Thread searchingThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Searching searching = new Searching(textField.getText(), radioButton.isSelected());
+                    Path startDirectory = Paths.get(Constants.workingDir);
+                    try {
+                        Files.walkFileTree(startDirectory, searching);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    new SecondWindow(searching.getInformation());
+                }
+            });
             searchingThread.start();
             try {
                 searchingThread.join();
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }
-            new SecondWindow(searching.getInformation());
+
 
         }
     }
