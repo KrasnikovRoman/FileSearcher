@@ -6,6 +6,7 @@ import java.awt.*;
 
 /**
  * Created by roman on 14.08.16.
+ * Вспомогательный класс для правильной отрисовки таблицы. Он помогает переносить строки в пределах одной записи в таблице
  */
 public class CellRenderer extends JTextArea implements TableCellRenderer {
 
@@ -29,8 +30,6 @@ public class CellRenderer extends JTextArea implements TableCellRenderer {
         if (table.getRowHeight(row) != newRowHeight) {
             table.setRowHeight(row, newRowHeight);
         }
-
-
 
         this.setText(data);
         return this;

@@ -2,7 +2,6 @@ package windows;
 
 import helper.Constants;
 import logic.Searching;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,9 +12,9 @@ import java.nio.file.Paths;
 
 /**
  * Created by roman on 11.08.16.
+ * Окно поиска приложения
  */
 public class FirstWindow extends JFrame implements ActionListener {
-    private Searching searching;
     private JTextField textField;
     private JLabel label;
     private JButton button;
@@ -64,21 +63,28 @@ public class FirstWindow extends JFrame implements ActionListener {
 
     private JRadioButton createRadioButton() {
         if (radioButton == null) {
-            radioButton = new JRadioButton(Constants.radioButtonName,false);
+            radioButton = new JRadioButton(Constants.radioButtonName, false);
             radioButton.setBounds(Constants.radioButtonX, Constants.radioButtonY, Constants.radioButtonWidth, Constants.radioButtonHeight);
             radioButton.addActionListener(this);
         }
         return radioButton;
     }
 
-
+    /**
+     * Слушатель событий от кнопки.
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(Constants.buttonName) && !textField.getText().equals("")) {
             Thread searchingThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Searching searching = new Searching(textField.getText(), radioButton.isSelected());
+                    Searching searching;
+                    if (textField.getText().equals("*"))
+                        searching = new Searching("." + textField.getText(), radioButton.isSelected());
+                    else
+                        searching = new Searching(textField.getText(), radioButton.isSelected());
                     Path startDirectory = Paths.get(Constants.workingDir);
                     try {
                         Files.walkFileTree(startDirectory, searching);
@@ -86,6 +92,7 @@ public class FirstWindow extends JFrame implements ActionListener {
                         e1.printStackTrace();
                     }
                     new SecondWindow(searching.getInformation());
+
                 }
             });
             searchingThread.start();

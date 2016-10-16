@@ -2,15 +2,14 @@ package windows;
 
 import helper.CellRenderer;
 import helper.Constants;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * Created by roman on 11.08.16.
+ * Окно с выводимой информацией о файлах
  */
 public class SecondWindow {
     HashMap<String, String> info;
@@ -30,7 +29,6 @@ public class SecondWindow {
         table.getColumnModel().getColumn(0).setCellRenderer(new CellRenderer());
         table.getColumnModel().getColumn(1).setCellRenderer(new CellRenderer());
         table.setPreferredScrollableViewportSize(new Dimension(450, 630));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(panel);
         frame.setVisible(true);
     }

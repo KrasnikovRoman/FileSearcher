@@ -2,11 +2,9 @@ package helper;
 
 /**
  * Created by roman on 11.08.16.
+ * Интерфейс для хранения констант
  */
 public interface Constants {
-    /*
-    Сonstants for drawing the appearance of application
-     */
     int height = 115;
     int width = 400;
     int secondWindowWidth = 500;
