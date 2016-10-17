@@ -1,4 +1,7 @@
 *.class
+.idea
+src/META-INF/MANIFEST.MF
+out/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
