@@ -2,7 +2,7 @@ package main;
 
 import windows.FirstWindow;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 
 /**
  * Created by roman on 11.08.16.

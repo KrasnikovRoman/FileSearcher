@@ -1,7 +1,10 @@
 package logic;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -65,7 +68,7 @@ public class Searching extends SimpleFileVisitor<Path> {
     }
 
     /**
-     * Метод вызывается после того, как найден был какой-либо файл
+     * Метод вызывается после того, как найден был какой-либо файл.
      * @param file путь к файлу
      * @param attrs
      * @return параметр дальнейшего действияпараметр дальнейшего действия
@@ -81,7 +84,7 @@ public class Searching extends SimpleFileVisitor<Path> {
     }
 
     /**
-     * Метод записывает информацию о найденом файле в HashMap
+     * Метод записывает информацию о найденом файле в HashMap.
      * @param path путь к файлу
      */
     void writeToMap(Path path) {
