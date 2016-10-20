@@ -19,6 +19,16 @@ public class Searching extends SimpleFileVisitor<Path> {
     private boolean moreInformationSelected;
     private Pattern pattern;
     private Matcher matcher;
+    private int dirCount;
+    private int fileCount;
+
+    public int getDirCount() {
+        return dirCount;
+    }
+
+    public int getFileCount() {
+        return fileCount;
+    }
 
     /**
      * Конструктор класса.
@@ -49,6 +59,7 @@ public class Searching extends SimpleFileVisitor<Path> {
         matcher = pattern.matcher(dir.getFileName().toString());
         if (matcher.matches()) {
             writeToMap(dir);
+            dirCount++;
         }
         return FileVisitResult.CONTINUE;
     }
@@ -79,6 +90,7 @@ public class Searching extends SimpleFileVisitor<Path> {
         matcher = pattern.matcher(file.getFileName().toString());
         if (matcher.matches()) {
             writeToMap(file);
+            fileCount++;
         }
         return FileVisitResult.CONTINUE;
     }
@@ -87,7 +99,7 @@ public class Searching extends SimpleFileVisitor<Path> {
      * Метод записывает информацию о найденом файле в HashMap.
      * @param path путь к файлу
      */
-    void writeToMap(Path path) {
+    private void writeToMap(Path path) {
         try {
             BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
             String infoAboutPath;
